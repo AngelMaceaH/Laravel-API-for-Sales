@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirigir todas las solicitudes al directorio /public/api/
+    RewriteRule ^(.*)$ /public/api/$1 [L,QSA]
+</IfModule>
