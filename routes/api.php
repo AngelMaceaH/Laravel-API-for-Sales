@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\index;
 
 
 /*
@@ -20,7 +20,7 @@ use App\Http\Controllers\IndexController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route ::get('/', [IndexController::class, 'get']);
+Route ::get('/', [index::class, 'get']);
 // Path: routes/api.php
 Route::get('/users', [UsersController::class, 'get']);
 Route::get('/users/{id}', [UsersController::class, 'show']);
