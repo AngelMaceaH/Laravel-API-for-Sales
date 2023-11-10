@@ -40,14 +40,12 @@ class UsersController extends Controller
             ], 400);
         }
         try {
-            // Creación del usuario con asignación masiva
-            $hashedPassword = Hash::make($request->password);
-            DB::statement('EXEC users_Create ?, ?, ?, ?, ?, ?, ?', [
+            DB::statement('EXEC users.[users_Create] ?, ?, ?, ?, ?, ?, ?', [
                 $request->user,
                 $request->name,
                 $request->lastname,
                 $request->email,
-                $hashedPassword,
+                $request->password,
                 $request->role,
                 $request->status
             ]);
