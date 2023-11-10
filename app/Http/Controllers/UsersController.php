@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Users;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -17,52 +20,50 @@ class UsersController extends Controller
     ], 200);
 }
 
-        public function create(Request $request)
-        {
-            // Validación de datos
-            $validator = Validator::make($request->all(), [
-                'user' => 'required|max:255',
-                'name' => 'required|max:255',
-                'lastname' => 'required|max:255',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:6',
-                'role' => 'required',
-                'status' => 'required',
-            ]);
-
-            if ($validator->fails()) {
-                return response()->json([
-                    "code" => 400,
-                    "message" => "Error en la validación",
-                    "errors" => $validator->errors(),
-                ], 400);
-            }
-
-            try {
-                // Creación del usuario con asignación masiva
-                $user = User::create([
-                    'user' => $request->user,
-                    'name' => $request->name,
-                    'lastname' => $request->lastname,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->password),
-                    'role' => $request->role,
-                    'status' => $request->status,
-                ]);
-
-                // Respuesta de éxito
-                return response()->json([
-                    "code" => 201,
-                    "message" => "Usuario creado correctamente",
-                ], 201);
-            } catch (\Exception $e) {
-                // Manejo de errores
-                return response()->json([
-                    "code" => 500,
-                    "message" => "Error al crear el usuario",
-                ], 500);
-            }
+    public function create(Request $request)
+    {
+        // Validación de datos
+        $validator = Validator::make($request->all(), [
+            'user' => 'required|max:30',
+            'name' => 'required|max:50',
+            'lastname' => 'required|max:50',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'role' => 'required',
+            'status' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                "code" => 400,
+                "message" => "Error en la validación",
+                "errors" => $validator->errors(),
+            ], 400);
         }
+        try {
+            // Creación del usuario con asignación masiva
+            $hashedPassword = Hash::make($request->password);
+            DB::statement('EXEC users_Create ?, ?, ?, ?, ?, ?, ?', [
+                $request->user,
+                $request->name,
+                $request->lastname,
+                $request->email,
+                $hashedPassword,
+                $request->role,
+                $request->status
+            ]);
+            // Respuesta de éxito
+            return response()->json([
+                "code" => 201,
+                "message" => "Usuario creado correctamente",
+            ], 201);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json([
+                "code" => 500,
+                "message" => "Error al crear el usuario",
+            ], 500);
+        }
+    }
 
     public function show($id)
     {
