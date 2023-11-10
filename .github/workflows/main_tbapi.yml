@@ -62,5 +62,5 @@ jobs:
         with:
           app-name: 'TBAPI'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EF5133354B8246DA8693180150451FE3 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F450A915DB1C4D78B88AFCB5CD7423B9 }}
           package: .
