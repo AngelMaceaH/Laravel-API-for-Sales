@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model
+class ShoppingCart_details extends Model
 {
     use HasFactory;
-    protected $table = 'users.tbusers';
+    protected $table = 'orders.tbshopping_cart_details';
     protected $fillable = [
-        'usern',
-        'namen',
-        'lastn',
-        'email',
-        'passn',
-        'saltn',
-        'rolen',
-        'statun',
+        'carti',
+        'prodi',
+        'quanti',
+        'pricei',
+        'totali',
+        'statui',
         'created_at',
         'updated_at'
     ];

@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model
+class Brands extends Model
 {
     use HasFactory;
-    protected $table = 'users.tbusers';
+    protected $table = 'products.tbbrands';
     protected $fillable = [
-        'usern',
-        'namen',
-        'lastn',
-        'email',
-        'passn',
-        'saltn',
-        'rolen',
-        'statun',
+        'nameb',
+        'imagb',
+        'statub',
         'created_at',
         'updated_at'
     ];

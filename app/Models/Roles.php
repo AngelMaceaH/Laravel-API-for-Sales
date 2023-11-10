@@ -5,19 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model
+class Roles extends Model
 {
     use HasFactory;
-    protected $table = 'users.tbusers';
+    protected $table = 'users.tbroles';
     protected $fillable = [
-        'usern',
-        'namen',
-        'lastn',
-        'email',
-        'passn',
-        'saltn',
         'rolen',
-        'statun',
         'created_at',
         'updated_at'
     ];

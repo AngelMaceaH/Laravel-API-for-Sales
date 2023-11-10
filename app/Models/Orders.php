@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Users extends Model
+class Orders extends Model
 {
     use HasFactory;
-    protected $table = 'users.tbusers';
+    protected $table = 'orders.tborders';
     protected $fillable = [
-        'usern',
-        'namen',
-        'lastn',
-        'email',
-        'passn',
-        'saltn',
-        'rolen',
-        'statun',
+        'cliei',
+        'totai',
+        'statui',
         'created_at',
         'updated_at'
     ];
