@@ -12,25 +12,32 @@ class UsersController extends Controller
 {
     public function get()
 {
-    $users = Users::all();
+    $users = Users::all()->map(function ($user) {
+        foreach ($user->getAttributes() as $key => $value) {
+            if (is_string($value)) {
+                $user->$key = trim($value);
+            }
+        }
+        return $user;
+    });
 
     return response()->json([
         "code" => "200",
         "data" => $users,
-    ], 200);
+    ], 200, [], JSON_UNESCAPED_UNICODE);
 }
+
 
     public function create(Request $request)
     {
         // Validación de datos
         $validator = Validator::make($request->all(), [
-            'user' => 'required|max:30',
-            'name' => 'required|max:50',
-            'lastname' => 'required|max:50',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'role' => 'required',
-            'status' => 'required',
+            'usern' => 'required|max:30',
+            'namen' => 'required|max:50',
+            'lastn' => 'required|max:50',
+            'email' => 'required|email|unique:users.tbusers',
+            'passn' => 'required|min:6',
+            'rolen' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -40,14 +47,13 @@ class UsersController extends Controller
             ], 400);
         }
         try {
-            DB::statement('EXEC users.[users_Create] ?, ?, ?, ?, ?, ?, ?', [
-                $request->user,
-                $request->name,
-                $request->lastname,
+            DB::statement('EXEC users.[users_Create] ?, ?, ?, ?, ?, ?', [
+                $request->usern,
+                $request->namen,
+                $request->lastn,
                 $request->email,
-                $request->password,
-                $request->role,
-                $request->status
+                $request->passn,
+                $request->rolen
             ]);
             // Respuesta de éxito
             return response()->json([

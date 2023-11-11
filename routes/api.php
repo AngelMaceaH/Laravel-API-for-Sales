@@ -20,7 +20,10 @@ use App\Http\Controllers\index;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route ::get('/', [index::class, 'get']);
+Route::get('/', function () {
+    return view('welcome');
+});
+
 // Path: routes/api.php
 Route::get('/users', [UsersController::class, 'get']);
 Route::get('/users/{id}', [UsersController::class, 'show']);
