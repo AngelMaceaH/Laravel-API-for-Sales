@@ -22,8 +22,8 @@
 <body style="background-color: #97A681">
     <div class="position-absolute top-50 start-50 translate-middle text-center">
         <img src="img/TBLogo.png" alt="" width="200px">
-        <h1 class="logo text-white">T R U E&nbsp;&nbsp;&nbsp;B E A U T Y&nbsp;&nbsp;&nbsp;A P I</h1>
-        <h5 class="text-white">BY ANGEL MACEA</h5> <a href="https://github.com/AngelMaceaH" target="_blank"><i class="fs-1 text-white bi bi-github"></i></a>
+        <h1 class="logo text-white" style="font-size: 4.3vw !important;">T R U E&nbsp;&nbsp;&nbsp;B E A U T Y&nbsp;&nbsp;&nbsp;A P I</h1>
+        <h6 class="text-white">BY ANGEL MACEA</h6> <a href="https://github.com/AngelMaceaH" target="_blank"><i class="fs-1 text-white bi bi-github"></i></a>
     </div>
     
 
