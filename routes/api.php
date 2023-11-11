@@ -17,13 +17,13 @@ use App\Http\Controllers\index;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 // Path: routes/api.php
 Route::get('/users', [UsersController::class, 'get']);
 Route::get('/users/{id}', [UsersController::class, 'show']);
